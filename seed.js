@@ -4,7 +4,7 @@ const express = require('express');
 
 const app = express();
 
-const Recipie = require('./models/Recipie');
+const Recipe = require('./models/Recipe');
 
 const { ingredients, descriptors, cats } = require('./seedHelpers');
 
@@ -20,12 +20,13 @@ mongoose
   .catch((err) => console.log(err));
 
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
+const randNum = Math.floor(Math.random() * 10);
 
 const seedDB = async () => {
-  await Recipie.deleteMany({});
+  await Recipe.deleteMany({});
 
   for (let i = 0; i < 10; i++) {
-    const dish = new Recipie({
+    const dish = new Recipe({
       name: `${sample(descriptors)} ${sample(ingredients)}`,
       description:
         'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis dolore est repudiandae neque nulla deserunt error accusantium voluptatibus.',
@@ -36,6 +37,7 @@ const seedDB = async () => {
         `${sample(descriptors)}`,
       ],
       categories: [`${sample(cats)}`],
+      likes: randNum,
     });
     await dish.save();
   }

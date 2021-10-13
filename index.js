@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 const app = express();
 
-const recipieRoutes = require('./routes/recipieRoutes');
+const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 // middleware
@@ -30,7 +30,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(userRoutes);
-app.use(recipieRoutes);
+app.use(recipeRoutes);
 
 // home route
 app.get('/', (req, res) => {
