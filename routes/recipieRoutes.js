@@ -4,6 +4,8 @@ const recipieController = require('../controllers/recipieController');
 
 const router = Router();
 
-router.get('/', recipieController.getAllRecipies);
+router.get('/recipies', recipieController.getAllRecipies);
+
+router.get('/recipies/:id', recipieController.getSingleRecipie);
 
 module.exports = router;
