@@ -27,3 +27,12 @@ module.exports.ingredients = [
   'wine',
   'milk',
 ];
+
+module.exports.cats = [
+  'vegetarian',
+  'vegan',
+  'asian',
+  'south america',
+  'chicken',
+  'sauce',
+];

@@ -6,7 +6,7 @@ const app = express();
 
 const Recipie = require('./models/Recipie');
 
-const { ingredients, descriptors } = require('./seedHelpers');
+const { ingredients, descriptors, cats } = require('./seedHelpers');
 
 mongoose
   .connect(process.env.DB_URI)
@@ -35,9 +35,12 @@ const seedDB = async () => {
         `${sample(descriptors)}`,
         `${sample(descriptors)}`,
       ],
+      categories: [`${sample(cats)}`],
     });
     await dish.save();
   }
+
+  console.log('DB seeded');
 };
 
 seedDB().then(() => {

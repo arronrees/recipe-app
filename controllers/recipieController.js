@@ -13,3 +13,12 @@ module.exports.getSingleRecipie = async (req, res) => {
 
   res.json(recipie);
 };
+
+module.exports.getCategoryRecipies = async (req, res) => {
+  const { id } = req.params;
+  const lowerId = id.toLowerCase();
+
+  const recipies = await Recipie.find({ categories: lowerId });
+
+  res.json(recipies);
+};

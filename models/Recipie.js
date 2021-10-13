@@ -13,7 +13,7 @@ const recipieSchema = new Schema({
     type: Array,
     required: true,
   },
-  tags: {
+  categories: {
     type: Array,
   },
   likes: {
