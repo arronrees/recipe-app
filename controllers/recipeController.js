@@ -47,3 +47,12 @@ module.exports.postNewRecipe = async (req, res) => {
 
   res.json(newRecipe);
 };
+
+module.exports.updateNewRecipe = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  const updatedRecipe = await Recipe.updateOne({ _id: id }, body);
+
+  res.json(updatedRecipe);
+};

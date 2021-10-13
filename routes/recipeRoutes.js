@@ -16,4 +16,10 @@ router.post(
   recipeController.postNewRecipe
 );
 
+router.put(
+  '/recipes/update/:id',
+  recipeController.validateRecipe,
+  recipeController.updateNewRecipe
+);
+
 module.exports = router;
