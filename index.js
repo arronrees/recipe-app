@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const app = express();
 
 const recipieRoutes = require('./routes/recipieRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
@@ -28,8 +29,15 @@ mongoose
   )
   .catch((err) => console.log(err));
 
+app.use(userRoutes);
 app.use(recipieRoutes);
 
+// home route
+app.get('/', (req, res) => {
+  res.send('Homepage');
+});
+
+// generic 404 for unused routes
 app.use((req, res) => {
   res.status(404).send('404 - Not Found');
 });
