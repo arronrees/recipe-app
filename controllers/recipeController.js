@@ -48,11 +48,19 @@ module.exports.postNewRecipe = async (req, res) => {
   res.json(newRecipe);
 };
 
-module.exports.updateNewRecipe = async (req, res) => {
+module.exports.updateRecipe = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
   const updatedRecipe = await Recipe.updateOne({ _id: id }, body);
 
   res.json(updatedRecipe);
+};
+
+module.exports.deleteRecipe = async (req, res) => {
+  const { id } = req.params;
+
+  const deletedRecipe = await Recipe.deleteOne({ _id: id });
+
+  res.json(deletedRecipe);
 };
