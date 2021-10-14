@@ -11,7 +11,7 @@ module.exports.validateRecipe = (req, res, next) => {
     console.log(msg);
     throw new Error();
   } else {
-    console.log('Recipe valid');
+    console.log('Recipe object valid');
     next();
   }
 };
