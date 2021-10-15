@@ -9,7 +9,7 @@ const { createToken } = require('../utils/createToken');
 // 1 day in seconds
 const maxAge = 24 * 60 * 60;
 
-module.exports.validateUser = (req, res, next) => {
+module.exports.validateUserObject = (req, res, next) => {
   const { body } = req;
 
   const { error } = joiUserSchema.validate(body);
@@ -18,7 +18,7 @@ module.exports.validateUser = (req, res, next) => {
     const msg = error.details.map((err) => err.message).join(',');
     console.log(msg);
 
-    throw new Error();
+    throw new Error(msg);
   } else {
     console.log('User object valid');
   }
@@ -29,8 +29,6 @@ module.exports.validateUser = (req, res, next) => {
 module.exports.postNewSignUp = async (req, res) => {
   const { body } = req;
   const { email, password } = body;
-
-  console.log(email, password);
 
   try {
     const newUser = await User.create(body);
@@ -43,6 +41,25 @@ module.exports.postNewSignUp = async (req, res) => {
   } catch (err) {
     const errors = handleUserErrors(err);
 
+    res.status(400).json(errors);
+  }
+};
+
+module.exports.postLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  console.log(email, password);
+
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+
+    const userToShow = { ...user._doc, password: 'hidden' };
+
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(200).json(userToShow);
+  } catch (err) {
+    const errors = handleUserErrors(err);
     res.status(400).json(errors);
   }
 };

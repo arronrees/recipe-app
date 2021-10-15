@@ -9,7 +9,7 @@ module.exports.validateRecipe = (req, res, next) => {
   if (error) {
     const msg = error.details.map((err) => err.message).join(',');
     console.log(msg);
-    throw new Error();
+    throw new Error(msg);
   } else {
     console.log('Recipe object valid');
     next();
