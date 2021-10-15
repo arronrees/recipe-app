@@ -48,7 +48,7 @@ module.exports.postNewRecipe = async (req, res) => {
   res.json(newRecipe);
 };
 
-module.exports.updateRecipe = async (req, res) => {
+module.exports.putUpdateRecipe = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 

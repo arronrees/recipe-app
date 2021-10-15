@@ -19,7 +19,7 @@ router.post(
 router.put(
   '/recipes/update/:id',
   recipeController.validateRecipe,
-  recipeController.updateRecipe
+  recipeController.putUpdateRecipe
 );
 
 router.delete('/recipes/delete/:id', recipeController.deleteRecipe);
