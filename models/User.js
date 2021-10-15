@@ -49,6 +49,21 @@ userSchema.statics.login = async function (email, password) {
   throw Error('Incorrect email');
 };
 
+// static method to update user password
+userSchema.statics.updatePassword = async function (id, password) {
+  const user = await User.findById(id);
+
+  if (user) {
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      throw Error('New password cannot be the same as current password');
+    }
+    return user;
+  }
+  throw Error('User not found');
+};
+
 const User = model('user', userSchema);
 
 module.exports = User;

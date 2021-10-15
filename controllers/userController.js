@@ -2,7 +2,10 @@ require('dotenv').config();
 
 const User = require('../models/User');
 
-const { joiUserSchema } = require('../models/joiSchemas/joiUser');
+const {
+  joiUserSchema,
+  joiPasswordValidate,
+} = require('../models/joiSchemas/joiUser');
 const { handleUserErrors } = require('../utils/handleErrors');
 const { createToken } = require('../utils/createToken');
 
@@ -21,6 +24,23 @@ module.exports.validateUserObject = (req, res, next) => {
     throw new Error(msg);
   } else {
     console.log('User object valid');
+  }
+
+  next();
+};
+
+module.exports.validatePassword = (req, res, next) => {
+  const { password } = req.body;
+
+  const { error } = joiPasswordValidate.validate(password);
+
+  if (error) {
+    const msg = error.details.map((err) => err.message).join(',');
+    console.log(msg);
+
+    throw new Error(msg);
+  } else {
+    console.log('Password valid');
   }
 
   next();
@@ -71,9 +91,24 @@ module.exports.putUpdateUserDetails = async (req, res) => {
 
   try {
     const updatedUser = await User.updateOne(
-      { id: id },
+      { _id: id },
       { firstName, lastName, username, email }
     );
+
+    res.status(201).json(updatedUser);
+  } catch (err) {
+    const errors = handleUserErrors(err);
+    res.status(400).json(errors);
+  }
+};
+
+module.exports.putUpdateUserPassword = async (req, res) => {
+  const { password } = req.body;
+  const { id } = req.params;
+
+  try {
+    await User.updatePassword(id, password);
+    const updatedUser = await User.updateOne({ _id: id }, { password });
 
     res.status(201).json(updatedUser);
   } catch (err) {
