@@ -107,7 +107,7 @@ module.exports.putUpdateUserPassword = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await User.updatePassword(id, password);
+    await User.updatePasswordCheck(id, password);
     const updatedUser = await User.updateOne({ _id: id }, { password });
 
     res.status(201).json(updatedUser);

@@ -50,7 +50,7 @@ userSchema.statics.login = async function (email, password) {
 };
 
 // static method to update user password
-userSchema.statics.updatePassword = async function (id, password) {
+userSchema.statics.updatePasswordCheck = async function (id, password) {
   const user = await User.findById(id);
 
   if (user) {

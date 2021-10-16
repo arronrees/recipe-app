@@ -17,26 +17,38 @@ module.exports.validateRecipe = (req, res, next) => {
 };
 
 module.exports.getAllRecipes = async (req, res) => {
-  const recipes = await Recipe.find({});
-
-  res.json(recipes);
+  try {
+    const recipes = await Recipe.find({});
+    res.status(200).json(recipes);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
 };
 
 module.exports.getSingleRecipe = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
+    const recipe = await Recipe.findById(id);
 
-  const recipe = await Recipe.findById(id);
-
-  res.json(recipe);
+    res.status(200).json(recipe);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
 };
 
 module.exports.getCategoryRecipes = async (req, res) => {
-  const { id } = req.params;
-  const lowerId = id.toLowerCase();
+  try {
+    const { id } = req.params;
+    const lowerId = id.toLowerCase();
 
-  const recipes = await Recipe.find({ categories: lowerId });
-
-  res.json(recipes);
+    const recipes = await Recipe.find({ categories: lowerId });
+    res.status(200).json(recipes);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
 };
 
 module.exports.postNewRecipe = async (req, res) => {
@@ -45,7 +57,7 @@ module.exports.postNewRecipe = async (req, res) => {
   const newRecipe = new Recipe(body);
   await newRecipe.save();
 
-  res.json(newRecipe);
+  res.status(201).json(newRecipe);
 };
 
 module.exports.putUpdateRecipe = async (req, res) => {
@@ -54,7 +66,7 @@ module.exports.putUpdateRecipe = async (req, res) => {
 
   const updatedRecipe = await Recipe.updateOne({ _id: id }, body);
 
-  res.json(updatedRecipe);
+  res.status(201).json(updatedRecipe);
 };
 
 module.exports.deleteRecipe = async (req, res) => {
@@ -62,5 +74,5 @@ module.exports.deleteRecipe = async (req, res) => {
 
   const deletedRecipe = await Recipe.deleteOne({ _id: id });
 
-  res.json(deletedRecipe);
+  res.status(200).json(deletedRecipe);
 };
