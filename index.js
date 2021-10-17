@@ -11,6 +11,8 @@ const app = express();
 const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+const { isLoggedin } = require('./middleware/authMiddleware');
+
 // register view engine
 app.set('view engine', 'ejs');
 
@@ -38,13 +40,14 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-app.use(userRoutes);
-app.use(recipeRoutes);
-
 // home route
+app.get('*', isLoggedin);
 app.get('/', (req, res) => {
   res.send('Homepage');
 });
+
+app.use(userRoutes);
+app.use(recipeRoutes);
 
 // generic 404 for unused routes
 app.use((req, res) => {

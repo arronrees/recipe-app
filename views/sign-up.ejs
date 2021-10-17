@@ -1,0 +1,73 @@
+<%- include('partials/header'); -%>
+
+  <main>
+
+    <section>
+
+      <form class="signup__form">
+        <div class="row">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="row">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+        <div class="row">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="row">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="row">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+    </section>
+
+  </main>
+
+  <script>
+    const form = document.querySelector('form.signup__form')
+
+    let user = {};
+
+    async function sendData(data) {
+      const res = await fetch('http://localhost:5000/user/sign-up', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      });
+      const response = await res.json();
+
+      if (response._id) {
+        window.location.assign('/recipes')
+      } else {
+        console.log(response)
+      }
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const inputs = form.querySelectorAll('input');
+
+      inputs.forEach(input => {
+        user[input.name] = input.value;
+      });
+
+      sendData(user)
+    });
+
+  </script>
+
+  <%- include('partials/footer'); -%>

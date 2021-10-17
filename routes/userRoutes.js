@@ -6,6 +6,10 @@ const { validatePassword } = require('../middleware/validatePassword');
 
 const router = Router();
 
+router.get('/sign-up', userController.getSignUp);
+
+router.get('/log-in', userController.getLogIn);
+
 router.post('/user/sign-up', validateUserObject, userController.postNewSignUp);
 
 router.post('/user/log-in', userController.postLogin);

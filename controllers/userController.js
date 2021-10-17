@@ -8,6 +8,14 @@ const { createToken } = require('../utils/createToken');
 // 1 day in seconds
 const maxAge = 24 * 60 * 60;
 
+module.exports.getSignUp = (req, res) => {
+  res.render('sign-up');
+};
+
+module.exports.getLogIn = (req, res) => {
+  res.render('log-in');
+};
+
 module.exports.postNewSignUp = async (req, res) => {
   const { body } = req;
 
