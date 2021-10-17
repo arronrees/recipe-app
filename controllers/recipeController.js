@@ -5,10 +5,10 @@ const { handleRecipeErrors } = require('../utils/handleErrors');
 module.exports.getAllRecipes = async (req, res) => {
   try {
     const recipes = await Recipe.find({});
-    res.status(200).json(recipes);
+    res.status(200).render('home', { recipes });
   } catch (err) {
     const errors = handleRecipeErrors(err);
-    res.status(404).json(errors);
+    res.status(404).render('404');
   }
 };
 
@@ -17,10 +17,10 @@ module.exports.getSingleRecipe = async (req, res) => {
     const { id } = req.params;
     const recipe = await Recipe.findOne({ _id: id });
 
-    res.status(200).json(recipe);
+    res.status(200).render('recipes/recipe', { recipe });
   } catch (err) {
     const errors = handleRecipeErrors(err);
-    res.status(errors.statusCode).json(errors);
+    res.status(errors.statusCode).render('404');
   }
 };
 
@@ -30,10 +30,10 @@ module.exports.getCategoryRecipes = async (req, res) => {
     const lowerId = id.toLowerCase();
 
     const recipes = await Recipe.find({ categories: lowerId });
-    res.status(200).json(recipes);
+    res.status(200).render('recipes/categories', { recipes });
   } catch (err) {
-    console.log(err);
-    res.status(404).json(err);
+    const errors = handleRecipeErrors(err);
+    res.status(errors.statusCode).render('404');
   }
 };
 

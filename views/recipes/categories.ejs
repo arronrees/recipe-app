@@ -1,0 +1,42 @@
+<%- include('../partials/header'); -%>
+
+  <main class="main">
+
+    <section class="recipe__grid">
+
+      <% recipes.forEach(recipe=> { %>
+        <a href="/recipes/<%=recipe._id%>" class="grid__recipe">
+          <article>
+            <h3>
+              <%=recipe.name%>
+            </h3>
+
+            <ul class="categories">
+              <% recipe.categories.forEach(cat=> { %>
+                <li>
+                  <%=cat%>
+                </li>
+                <% })%>
+            </ul>
+
+            <p class="desc">
+              <%=recipe.description.substr(0, 100)%>
+                ...
+            </p>
+
+            <h6>
+              <%=recipe.likes%>
+            </h6>
+          </article>
+        </a>
+        <% }) %>
+
+    </section>
+
+    <section class="sidebar">
+
+    </section>
+
+  </main>
+
+  <%- include('../partials/footer'); -%>

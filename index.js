@@ -1,18 +1,27 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const app = express();
 
 const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+// register view engine
+app.set('view engine', 'ejs');
+
+// static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 // middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+// app.use(cors());
 app.use(morgan('tiny'));
 
 // mongodb connection
