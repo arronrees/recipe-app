@@ -1,20 +1,4 @@
 const Recipe = require('../models/Recipe');
-const { joiRecipeSchema } = require('../models/joiSchemas/joiRecipe');
-
-module.exports.validateRecipe = (req, res, next) => {
-  const { body } = req;
-
-  const { error } = joiRecipeSchema.validate(body);
-
-  if (error) {
-    const msg = error.details.map((err) => err.message).join(',');
-    console.log(msg);
-    throw new Error(msg);
-  } else {
-    console.log('Recipe object valid');
-    next();
-  }
-};
 
 module.exports.getAllRecipes = async (req, res) => {
   try {

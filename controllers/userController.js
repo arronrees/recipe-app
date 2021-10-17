@@ -2,53 +2,14 @@ require('dotenv').config();
 
 const User = require('../models/User');
 
-const {
-  joiUserSchema,
-  joiPasswordValidate,
-} = require('../models/joiSchemas/joiUser');
 const { handleUserErrors } = require('../utils/handleErrors');
 const { createToken } = require('../utils/createToken');
 
 // 1 day in seconds
 const maxAge = 24 * 60 * 60;
 
-module.exports.validateUserObject = (req, res, next) => {
-  const { body } = req;
-
-  const { error } = joiUserSchema.validate(body);
-
-  if (error) {
-    const msg = error.details.map((err) => err.message).join(',');
-    console.log(msg);
-
-    throw new Error(msg);
-  } else {
-    console.log('User object valid');
-  }
-
-  next();
-};
-
-module.exports.validatePassword = (req, res, next) => {
-  const { password } = req.body;
-
-  const { error } = joiPasswordValidate.validate(password);
-
-  if (error) {
-    const msg = error.details.map((err) => err.message).join(',');
-    console.log(msg);
-
-    throw new Error(msg);
-  } else {
-    console.log('Password valid');
-  }
-
-  next();
-};
-
 module.exports.postNewSignUp = async (req, res) => {
   const { body } = req;
-  const { email, password } = body;
 
   try {
     const newUser = await User.create(body);

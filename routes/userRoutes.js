@@ -1,14 +1,12 @@
 const { Router } = require('express');
 
 const userController = require('../controllers/userController');
+const { validateUserObject } = require('../middleware/validateUserObject');
+const { validatePassword } = require('../middleware/validatePassword');
 
 const router = Router();
 
-router.post(
-  '/user/sign-up',
-  userController.validateUserObject,
-  userController.postNewSignUp
-);
+router.post('/user/sign-up', validateUserObject, userController.postNewSignUp);
 
 router.post('/user/log-in', userController.postLogin);
 
@@ -16,7 +14,7 @@ router.put('/user/update-details/:id', userController.putUpdateUserDetails);
 
 router.put(
   '/user/update-password/:id',
-  userController.validatePassword,
+  validatePassword,
   userController.putUpdateUserPassword
 );
 

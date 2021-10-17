@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const recipeController = require('../controllers/recipeController');
+const { validateRecipeObject } = require('../middleware/validateRecipeObject');
 
 const router = Router();
 
@@ -12,13 +13,13 @@ router.get('/recipes/categories/:id', recipeController.getCategoryRecipes);
 
 router.post(
   '/recipes/new',
-  recipeController.validateRecipe,
+  validateRecipeObject,
   recipeController.postNewRecipe
 );
 
 router.put(
   '/recipes/update/:id',
-  recipeController.validateRecipe,
+  validateRecipeObject,
   recipeController.putUpdateRecipe
 );
 
