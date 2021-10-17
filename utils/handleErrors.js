@@ -26,3 +26,20 @@ module.exports.handleUserErrors = (err) => {
 
   return errors;
 };
+
+module.exports.handleRecipeErrors = (err) => {
+  console.log(err.message, err.code);
+
+  let errors = {
+    message: '',
+    statusCode: 400,
+  };
+
+  // no recipe with that id
+  if (err.message.includes('Cast to ObjectId failed for value')) {
+    errors.message = 'No recipe found with that id';
+    errors.statusCode = 404;
+  }
+
+  return errors;
+};

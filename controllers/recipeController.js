@@ -1,24 +1,26 @@
 const Recipe = require('../models/Recipe');
 
+const { handleRecipeErrors } = require('../utils/handleErrors');
+
 module.exports.getAllRecipes = async (req, res) => {
   try {
     const recipes = await Recipe.find({});
     res.status(200).json(recipes);
   } catch (err) {
-    console.log(err);
-    res.status(404).json(err);
+    const errors = handleRecipeErrors(err);
+    res.status(404).json(errors);
   }
 };
 
 module.exports.getSingleRecipe = async (req, res) => {
   try {
     const { id } = req.params;
-    const recipe = await Recipe.findById(id);
+    const recipe = await Recipe.findOne({ _id: id });
 
     res.status(200).json(recipe);
   } catch (err) {
-    console.log(err);
-    res.status(404).json(err);
+    const errors = handleRecipeErrors(err);
+    res.status(errors.statusCode).json(errors);
   }
 };
 
