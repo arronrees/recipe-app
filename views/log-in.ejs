@@ -5,10 +5,64 @@
     <section>
 
       <form class="login__form">
-
+        <div class="row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <div class="error--email"></div>
+        </div>
+        <div class="row">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+          <div class="error--password"></div>
+        </div>
+        <div class="row">
+          <button type="submit">Submit</button>
+        </div>
       </form>
 
     </section>
+
+  </main>
+
+  <script>
+    const form = document.querySelector('form.login__form')
+
+    let user = {};
+
+    async function sendData(data) {
+      const res = await fetch('http://localhost:5000/user/log-in', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      });
+      const response = await res.json();
+
+      if (response._id) {
+        window.location.assign('/recipes')
+      } else if (response.email) {
+        document.querySelector('.error--email').textContent = response.email;
+      } else if (response.password) {
+        document.querySelector('.error--password').textContent = response.password
+      } else {
+        console.log(response)
+      }
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const inputs = form.querySelectorAll('input');
+
+      inputs.forEach(input => {
+        user[input.name] = input.value;
+      });
+
+      sendData(user)
+    });
+
+  </script>
 
   </main>
 
