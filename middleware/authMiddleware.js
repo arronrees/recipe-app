@@ -2,7 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-module.exports.isLoggedin = (req, res, next) => {
+module.exports.updateLoginStatus = (req, res, next) => {
   const token = req.cookies.jwt;
 
   if (token) {
@@ -19,6 +19,14 @@ module.exports.isLoggedin = (req, res, next) => {
     });
   } else {
     res.locals.user = null;
+    next();
+  }
+};
+
+module.exports.checkLoggedIn = (req, res, next) => {
+  if (res.locals.user) {
+    res.redirect('/recipes');
+  } else {
     next();
   }
 };

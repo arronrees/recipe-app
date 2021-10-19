@@ -3,12 +3,13 @@ const { Router } = require('express');
 const userController = require('../controllers/userController');
 const { validateUserObject } = require('../middleware/validateUserObject');
 const { validatePassword } = require('../middleware/validatePassword');
+const { checkLoggedIn } = require('../middleware/authMiddleware');
 
 const router = Router();
 
-router.get('/sign-up', userController.getSignUp);
+router.get('/sign-up', checkLoggedIn, userController.getSignUp);
 
-router.get('/log-in', userController.getLogIn);
+router.get('/log-in', checkLoggedIn, userController.getLogIn);
 
 router.post('/user/sign-up', validateUserObject, userController.postNewSignUp);
 

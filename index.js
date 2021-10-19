@@ -11,7 +11,7 @@ const app = express();
 const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-const { isLoggedin } = require('./middleware/authMiddleware');
+const { updateLoginStatus } = require('./middleware/authMiddleware');
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -41,7 +41,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // home route
-app.get('*', isLoggedin);
+app.get('*', updateLoginStatus);
 app.get('/', (req, res) => {
   res.send('Homepage');
 });
