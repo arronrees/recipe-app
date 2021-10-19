@@ -23,7 +23,7 @@ module.exports.updateLoginStatus = (req, res, next) => {
   }
 };
 
-module.exports.checkLoggedIn = (req, res, next) => {
+module.exports.checkLoggedInRedirect = (req, res, next) => {
   if (res.locals.user) {
     res.redirect('/recipes');
   } else {

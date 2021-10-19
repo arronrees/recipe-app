@@ -43,3 +43,21 @@ module.exports.handleRecipeErrors = (err) => {
 
   return errors;
 };
+
+module.exports.handleJoiUserErrors = (err) => {
+  console.log(err.code, err.message);
+
+  let errors = {
+    email: '',
+    password: '',
+  };
+
+  // password not long enough
+  if (
+    err.message.includes('"password" length must be at least 8 characters long')
+  ) {
+    errors.password = 'Password must be at least 8 characters';
+  }
+
+  return errors;
+};

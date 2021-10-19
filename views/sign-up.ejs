@@ -8,22 +8,27 @@
         <div class="row">
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" name="firstName" required>
+          <div class="error--firstName"></div>
         </div>
         <div class="row">
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" name="lastName" required>
+          <div class="error--lastName"></div>
         </div>
         <div class="row">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" required>
+          <div class="error--username"></div>
         </div>
         <div class="row">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
+          <div class="error--email"></div>
         </div>
         <div class="row">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>
+          <div class="error--password"></div>
         </div>
         <div class="row">
           <button type="submit">Submit</button>
@@ -51,6 +56,12 @@
 
       if (response._id) {
         window.location.assign('/recipes')
+      } else if (response.username) {
+        document.querySelector('.error--username').textContent = 'Username already taken'
+      } else if (response.email) {
+        document.querySelector('error--email').textContent = 'Email already registered, please login'
+      } else if (response.password) {
+        document.querySelector('.error--password').textContent = 'Password must be at least 8 characters'
       } else {
         console.log(response)
       }

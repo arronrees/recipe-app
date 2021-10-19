@@ -43,7 +43,7 @@ mongoose
 // home route
 app.get('*', updateLoginStatus);
 app.get('/', (req, res) => {
-  res.send('Homepage');
+  res.redirect('/recipes');
 });
 
 app.use(userRoutes);
