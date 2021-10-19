@@ -37,6 +37,10 @@ module.exports.getCategoryRecipes = async (req, res) => {
   }
 };
 
+module.exports.getNewRecipe = async (req, res) => {
+  res.render('recipes/new');
+};
+
 module.exports.postNewRecipe = async (req, res) => {
   const { body } = req;
 

@@ -7,6 +7,8 @@ const router = Router();
 
 router.get('/recipes', recipeController.getAllRecipes);
 
+router.get('/recipes/new', recipeController.getNewRecipe);
+
 router.get('/recipes/:id', recipeController.getSingleRecipe);
 
 router.get('/recipes/categories/:id', recipeController.getCategoryRecipes);

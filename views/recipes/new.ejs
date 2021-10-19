@@ -1,0 +1,79 @@
+<%- include('../partials/header'); -%>
+
+<main class="main">
+  <section>
+    <form class="new__recipe__form">
+      <div class="row">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div class="row">
+        <label for="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
+      </div>
+      <div class="row">
+        <label for="ingredients">Ingredients</label>
+        <input type="text" name="ingredients" id="ingredients" required />
+      </div>
+      <div class="row">
+        <label for="categories">Categories</label>
+        <input type="text" name="categories" id="categories" required />
+      </div>
+      <div class="row">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    async function sendData(data) {
+      const res = await fetch('http://localhost:5000/recipes/new', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+      const response = await res.json();
+
+      console.log(response);
+
+      if (response._id) {
+        window.location.assign('/recipes');
+      }
+    }
+
+    const form = document.querySelector('.new__recipe__form');
+
+    let recipe = {};
+
+    const inputs = document.querySelectorAll('input');
+    const textareas = document.querySelectorAll('textarea');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      inputs.forEach((input) => {
+        if (input.name === 'ingredients' || input.name === 'categories') {
+          recipe[input.name] = [input.value];
+        } else {
+          recipe[input.name] = input.value;
+        }
+      });
+
+      textareas.forEach((textarea) => {
+        recipe[textarea.name] = textarea.value;
+      });
+
+      sendData(recipe);
+    });
+  </script>
+</main>
+
+<%- include('../partials/footer'); -%>
