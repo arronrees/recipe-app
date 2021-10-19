@@ -10,6 +10,7 @@ const app = express();
 
 const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 
 const { updateLoginStatus } = require('./middleware/authMiddleware');
 
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(userRoutes);
+app.use(profileRoutes);
 app.use(recipeRoutes);
 
 // generic 404 for unused routes

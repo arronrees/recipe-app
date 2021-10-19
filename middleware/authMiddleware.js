@@ -24,9 +24,17 @@ module.exports.updateLoginStatus = (req, res, next) => {
 };
 
 module.exports.checkLoggedInRedirect = (req, res, next) => {
-  if (res.locals.user) {
-    res.redirect('/recipes');
-  } else {
-    next();
+  if (req.path === '/log-in' || req.path === '/sign-up') {
+    if (res.locals.user) {
+      res.redirect('/recipes');
+    } else {
+      next();
+    }
+  } else if (req.path === '/profile') {
+    if (res.locals.user) {
+      next();
+    } else {
+      res.redirect('/log-in');
+    }
   }
 };
