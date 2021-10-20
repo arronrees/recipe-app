@@ -41,6 +41,13 @@ module.exports.getCategoryRecipes = async (req, res) => {
   }
 };
 
+module.exports.getUserRecipes = async (req, res) => {
+  const { id } = req.params;
+  const recipes = await Recipe.find({ user: id }).populate('user', 'username');
+
+  res.render('recipes/user-recipes', { recipes });
+};
+
 module.exports.getNewRecipe = async (req, res) => {
   res.render('recipes/new');
 };
