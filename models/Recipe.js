@@ -18,9 +18,14 @@ const recipeSchema = new Schema({
   },
   likes: {
     type: Number,
+    default: 0,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
 });
 
-const Recipe = model('recipe', recipeSchema);
+const Recipe = model('Recipe', recipeSchema);
 
 module.exports = Recipe;

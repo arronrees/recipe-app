@@ -8,6 +8,12 @@
         <%=recipe.name%>
       </h1>
 
+      <h4>
+        <a href="/users/<%=recipe.user._id%>">
+          <%=recipe.user.username%>
+        </a>
+      </h4>
+
       <ul class="categories">
         <% recipe.categories.forEach(cat=> { %>
           <li>

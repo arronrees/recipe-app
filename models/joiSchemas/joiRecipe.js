@@ -6,4 +6,5 @@ module.exports.joiRecipeSchema = Joi.object({
   ingredients: Joi.array().items(Joi.string()).required(),
   categories: Joi.array().items(Joi.string()),
   likes: Joi.number(),
+  user: Joi.string().required(),
 });

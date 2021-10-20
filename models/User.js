@@ -64,6 +64,6 @@ userSchema.statics.updatePasswordCheck = async function (id, password) {
   throw Error('User not found');
 };
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;

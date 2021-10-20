@@ -20,12 +20,12 @@ mongoose
   .catch((err) => console.log(err));
 
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
-const randNum = Math.floor(Math.random() * 10);
 
 const seedDB = async () => {
   await Recipe.deleteMany({});
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 20; i++) {
+    const randNum = Math.floor(Math.random() * 20);
     const dish = new Recipe({
       name: `${sample(descriptors)} ${sample(ingredients)}`,
       description:
@@ -38,6 +38,8 @@ const seedDB = async () => {
       ],
       categories: [`${sample(cats)}`],
       likes: randNum,
+      user:
+        randNum > 10 ? '6168715951114b2160db286d' : '6168793927958a5fc0ef7def',
     });
     await dish.save();
   }
