@@ -53,6 +53,12 @@ module.exports.postLogin = async (req, res) => {
   }
 };
 
+module.exports.postSignOut = async (req, res) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+
+  res.json({ success: true });
+};
+
 module.exports.putUpdateUserDetails = async (req, res) => {
   // dont send password in body as not needed in handler
   const { firstName, lastName, username, email } = req.body;

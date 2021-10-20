@@ -20,6 +20,9 @@
           <li>
             <a href="/profile"> My profile </a>
           </li>
+          <li>
+            <button class="sign__out__btn">Sign Out</button>
+          </li>
           <% } else { %>
           <li>
             <a href="/log-in"> Log In </a>
@@ -31,5 +34,28 @@
         </ul>
       </nav>
     </header>
-  </body>
-</html>
+
+    <script>
+      if (!!document.querySelector('.sign__out__btn')) {
+        const signOutBtn = document.querySelector('.sign__out__btn');
+
+        async function signOut() {
+          const res = await fetch('http://localhost:5000/sign-out', {
+            method: 'POST',
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            window.location.assign('/recipes');
+          } else {
+            window.location.reload();
+          }
+        }
+
+        signOutBtn.addEventListener('click', () => {
+          signOut();
+        });
+      }
+    </script>
+
