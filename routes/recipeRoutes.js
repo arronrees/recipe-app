@@ -32,7 +32,7 @@ router.put(
   recipeController.putUpdateRecipe
 );
 
-router.put('/recipes/add-likes/:id', recipeController.putAddRecipeLikes);
+router.put('/recipes/update-likes/:id', recipeController.putUpdateRecipeLikes);
 
 router.delete('/recipes/delete/:id', recipeController.deleteRecipe);
 

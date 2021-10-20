@@ -25,6 +25,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
+  likedRecipes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Recipe',
+    },
+  ],
 });
 
 // function to run before user saved to database

@@ -40,8 +40,10 @@
         <%=recipe.likes%>
       </h6>
       <% if(user) { %>
-        <button class="like__btn" type="btn">Like</button>
-        <%}%>
+        <% if (!recipeLiked.liked) { %>
+          <button class="like__btn" type="btn">Like</button>
+          <% } %>
+            <%}%>
     </section>
 
     <section class="sidebar">
@@ -50,7 +52,9 @@
 
     <script>
       async function sendLike() {
-        const res = await fetch('http://localhost:5000/recipes/add-likes/<%=recipe._id%>', { method: 'PUT' })
+        const res = await fetch('http://localhost:5000/recipes/update-likes/<%=recipe._id%>', {
+          method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: '<%=user._id%>' })
+        })
 
         const data = await res.json();
 

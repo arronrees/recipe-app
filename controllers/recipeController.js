@@ -1,15 +1,17 @@
 const Recipe = require('../models/Recipe');
+const User = require('../models/User');
 
 const { handleRecipeErrors } = require('../utils/handleErrors');
 
 module.exports.getAllRecipes = async (req, res) => {
   try {
     const recipes = await Recipe.find({}).populate('user', 'username');
+    recipes.reverse();
 
     res.status(200).render('home', { recipes });
   } catch (err) {
     const errors = handleRecipeErrors(err);
-    res.status(404).render('404');
+    res.status(errors.statusCode).render('404');
   }
 };
 
@@ -21,7 +23,16 @@ module.exports.getSingleRecipe = async (req, res) => {
       'username'
     );
 
-    res.status(200).render('recipes/recipe', { recipe });
+    const user = res.locals.user;
+    let recipeLiked = { liked: false };
+
+    user.likedRecipes.forEach((r) => {
+      if (r._id.toString() === id) {
+        recipeLiked.liked = true;
+      }
+    });
+
+    res.status(200).render('recipes/recipe', { recipe, recipeLiked });
   } catch (err) {
     const errors = handleRecipeErrors(err);
     res.status(errors.statusCode).render('404');
@@ -34,6 +45,8 @@ module.exports.getCategoryRecipes = async (req, res) => {
     const lowerId = id.toLowerCase();
 
     const recipes = await Recipe.find({ categories: lowerId });
+    recipes.reverse();
+
     res.status(200).render('recipes/categories', { recipes });
   } catch (err) {
     const errors = handleRecipeErrors(err);
@@ -44,6 +57,7 @@ module.exports.getCategoryRecipes = async (req, res) => {
 module.exports.getUserRecipes = async (req, res) => {
   const { id } = req.params;
   const recipes = await Recipe.find({ user: id }).populate('user', 'username');
+  recipes.reverse();
 
   res.render('recipes/user-recipes', { recipes });
 };
@@ -55,8 +69,7 @@ module.exports.getNewRecipe = async (req, res) => {
 module.exports.postNewRecipe = async (req, res) => {
   const { body } = req;
 
-  const newRecipe = new Recipe(body);
-  await newRecipe.save();
+  const newRecipe = await Recipe.create(body);
 
   res.status(201).json(newRecipe);
 };
@@ -70,12 +83,28 @@ module.exports.putUpdateRecipe = async (req, res) => {
   res.status(201).json(updatedRecipe);
 };
 
-module.exports.putAddRecipeLikes = async (req, res) => {
+module.exports.putUpdateRecipeLikes = async (req, res) => {
   const { id } = req.params;
+  const { userId } = req.body;
 
-  const recipe = await Recipe.findById(id);
-  recipe.likes = recipe.likes + 1;
-  await recipe.save();
+  let alreadyLiked = false;
+
+  const user = await User.findById(userId).populate('likedRecipes');
+
+  user.likedRecipes.forEach((r) => {
+    if (r._id.toString() === id) {
+      alreadyLiked = true;
+    }
+  });
+
+  if (!alreadyLiked) {
+    const recipe = await Recipe.findById(id);
+    recipe.likes = recipe.likes + 1;
+    await recipe.save();
+
+    user.likedRecipes.push(id);
+    await user.save();
+  }
 
   res.json({ success: true });
 };
