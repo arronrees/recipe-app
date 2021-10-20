@@ -33,12 +33,34 @@
       <h6>
         <%=recipe.likes%>
       </h6>
-
+      <% if(user) { %>
+        <button class="like__btn" type="btn">Like</button>
+        <%}%>
     </section>
 
     <section class="sidebar">
 
     </section>
+
+    <script>
+      async function sendLike() {
+        const res = await fetch('http://localhost:5000/recipes/add-likes/<%=recipe._id%>', { method: 'PUT' })
+
+        const data = await res.json();
+
+        if (data.success) {
+          window.location.reload()
+        }
+      }
+
+      if (!!document.querySelector('.like__btn')) {
+        const likeBtn = document.querySelector('.like__btn')
+
+        likeBtn.addEventListener('click', () => {
+          sendLike()
+        });
+      }
+    </script>
 
   </main>
 

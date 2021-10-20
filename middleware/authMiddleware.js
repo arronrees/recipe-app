@@ -30,7 +30,17 @@ module.exports.checkLoggedInRedirect = (req, res, next) => {
     } else {
       next();
     }
-  } else if (req.path === '/profile') {
+  }
+
+  if (req.path === '/profile') {
+    if (res.locals.user) {
+      next();
+    } else {
+      res.redirect('/log-in');
+    }
+  }
+
+  if (req.path === '/recipes/new') {
     if (res.locals.user) {
       next();
     } else {

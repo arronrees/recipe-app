@@ -59,6 +59,16 @@ module.exports.putUpdateRecipe = async (req, res) => {
   res.status(201).json(updatedRecipe);
 };
 
+module.exports.putAddRecipeLikes = async (req, res) => {
+  const { id } = req.params;
+
+  const recipe = await Recipe.findById(id);
+  recipe.likes = recipe.likes + 1;
+  await recipe.save();
+
+  res.json({ success: true });
+};
+
 module.exports.deleteRecipe = async (req, res) => {
   const { id } = req.params;
 
