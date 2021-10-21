@@ -24,6 +24,9 @@ const recipeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  image: {
+    type: String,
+  },
 });
 
 const Recipe = model('Recipe', recipeSchema);

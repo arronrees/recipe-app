@@ -59,7 +59,7 @@
       } else if (response.username) {
         document.querySelector('.error--username').textContent = 'Username already taken'
       } else if (response.email) {
-        document.querySelector('error--email').textContent = 'Email already registered, please login'
+        document.querySelector('.error--email').textContent = 'Email already registered, please login'
       } else if (response.password) {
         document.querySelector('.error--password').textContent = 'Password must be at least 8 characters'
       } else {
