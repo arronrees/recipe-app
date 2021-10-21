@@ -13,4 +13,10 @@ router.get(
   profileController.getProfileLikedRecipes
 );
 
+router.get(
+  '/profile/my-recipes',
+  checkLoggedInRedirect,
+  profileController.getMyRecipes
+);
+
 module.exports = router;

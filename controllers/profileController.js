@@ -1,3 +1,4 @@
+const Recipe = require('../models/Recipe');
 const User = require('../models/User');
 
 module.exports.getProfile = async (req, res) => {
@@ -14,4 +15,12 @@ module.exports.getProfileLikedRecipes = async (req, res) => {
   const recipes = await user.likedRecipes;
 
   res.render('profile/liked-recipes', { recipes });
+};
+
+module.exports.getMyRecipes = async (req, res) => {
+  const id = res.locals.user._id;
+
+  const recipes = await Recipe.find({ user: id });
+
+  res.render('profile/my-recipes', { recipes });
 };
