@@ -23,14 +23,17 @@ module.exports.getSingleRecipe = async (req, res) => {
       'username'
     );
 
-    const user = res.locals.user;
     let recipeLiked = { liked: false };
 
-    user.likedRecipes.forEach((r) => {
-      if (r._id.toString() === id) {
-        recipeLiked.liked = true;
-      }
-    });
+    const user = res.locals.user;
+
+    if (user) {
+      user.likedRecipes.forEach((r) => {
+        if (r._id.toString() === id) {
+          recipeLiked.liked = true;
+        }
+      });
+    }
 
     res.status(200).render('recipes/recipe', { recipe, recipeLiked });
   } catch (err) {

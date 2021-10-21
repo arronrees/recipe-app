@@ -56,27 +56,29 @@
 
     </section>
 
-    <script>
-      async function sendLike() {
-        const res = await fetch('http://localhost:5000/recipes/update-likes/<%=recipe._id%>', {
-          method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: '<%=user._id%>' })
-        })
+    <% if(user) { %>
+      <script>
+        async function sendLike() {
+          const res = await fetch('http://localhost:5000/recipes/update-likes/<%=recipe._id%>', {
+            method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: '<%=user._id%>' })
+          })
 
-        const data = await res.json();
+          const data = await res.json();
 
-        if (data.success) {
-          window.location.reload()
+          if (data.success) {
+            window.location.reload()
+          }
         }
-      }
 
-      if (!!document.querySelector('.like__btn')) {
-        const likeBtn = document.querySelector('.like__btn')
+        if (!!document.querySelector('.like__btn')) {
+          const likeBtn = document.querySelector('.like__btn')
 
-        likeBtn.addEventListener('click', () => {
-          sendLike()
-        });
-      }
-    </script>
+          likeBtn.addEventListener('click', () => {
+            sendLike()
+          });
+        }
+      </script>
+      <% }%>
 
   </main>
 
