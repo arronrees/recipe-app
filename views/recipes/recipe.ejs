@@ -1,86 +1,81 @@
 <%- include('../partials/header'); -%>
 
-  <main class="main">
+<main class="main">
+  <section class="recipe">
+    <figure>
+      <img src="<%=recipe.image%>" alt="<%=recipe.name%>" />
+    </figure>
 
-    <section class="recipe">
+    <h1><%=recipe.name%></h1>
 
-      <img src="<%=recipe.image%>" alt="<%=recipe.name%>" width="400px" height="400px" />
+    <h4>
+      <a href="/recipes/users/<%=recipe.user._id%>">
+        <%=recipe.user.username%>
+      </a>
+    </h4>
 
-      <h1>
-        <%=recipe.name%>
-      </h1>
-      <h4>
-        <a href="/recipes/users/<%=recipe.user._id%>">
-          <%=recipe.user.username%>
-        </a>
-      </h4>
+    <ul class="categories">
+      <% recipe.categories.forEach(cat=> { %>
+      <li>
+        <a href="/recipes/categories/<%=cat%>">#<%=cat%> </a>
+      </li>
+      <% })%>
+    </ul>
 
-      <ul class="categories">
-        <% recipe.categories.forEach(cat=> { %>
-          <li>
-            <a href="/recipes/categories/<%=cat%>">
-              <%=cat%>
-            </a>
-          </li>
-          <% })%>
-      </ul>
+    <p class="desc"><%=recipe.description%></p>
 
-      <p class="desc">
-        <%=recipe.description%>
-      </p>
+    <ul class="ingredients">
+      <h5>Ingredients</h5>
+      <% recipe.ingredients.forEach(ing=> { %>
+      <li><%=ing%></li>
+      <% })%>
+    </ul>
 
-      <ul class="ingredients">
-        <% recipe.ingredients.forEach(ing=> { %>
-          <li>
-            <%=ing%>
-          </li>
-          <% })%>
-      </ul>
-
-      <h6>
-        <%=recipe.likes%>
-      </h6>
-      <% if(user) { %>
-
-        <button class="like__btn" type="btn">
-          <% if (!recipeLiked.liked) { %>
-            Like
-            <% } else { %>
-              Unlike
-              <%}%>
-        </button>
-
-        <%}%>
-    </section>
-
-    <section class="sidebar">
-
-    </section>
-
+    <h6 class="likes"><%=recipe.likes%></h6>
     <% if(user) { %>
-      <script>
-        async function sendLike() {
-          const res = await fetch('http://localhost:5000/recipes/update-likes/<%=recipe._id%>', {
-            method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: '<%=user._id%>' })
-          })
 
-          const data = await res.json();
+    <button class="like__btn" type="btn">
+      <% if (!recipeLiked.liked) { %> Like <% } else { %> Unlike <%}%>
+    </button>
 
-          if (data.success) {
-            window.location.reload()
-          }
+    <div class="content">
+      <h5>Recipe</h5>
+      <p></p>
+    </div>
+
+    <%}%>
+  </section>
+
+  <section class="sidebar"></section>
+
+  <% if(user) { %>
+  <script>
+    async function sendLike() {
+      const res = await fetch(
+        'http://localhost:5000/recipes/update-likes/<%=recipe._id%>',
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: '<%=user._id%>' }),
         }
+      );
 
-        if (!!document.querySelector('.like__btn')) {
-          const likeBtn = document.querySelector('.like__btn')
+      const data = await res.json();
 
-          likeBtn.addEventListener('click', () => {
-            sendLike()
-          });
-        }
-      </script>
-      <% }%>
+      if (data.success) {
+        window.location.reload();
+      }
+    }
 
-  </main>
+    if (!!document.querySelector('.like__btn')) {
+      const likeBtn = document.querySelector('.like__btn');
 
-  <%- include('../partials/footer'); -%>
+      likeBtn.addEventListener('click', () => {
+        sendLike();
+      });
+    }
+  </script>
+  <% }%>
+</main>
+
+<%- include('../partials/footer'); -%>

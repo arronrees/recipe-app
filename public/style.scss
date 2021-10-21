@@ -1,0 +1,290 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+figure {
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+body {
+  font-family: 'Belleza', sans-serif;
+  // font-family: 'Bitter', serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+button {
+  border: none;
+  background: none;
+  outline: none;
+
+  cursor: pointer;
+  font-family: 'Belleza', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+/* header */
+.header {
+  .logo {
+    font-size: 1.25rem;
+    font-family: 'Bitter', serif;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem 0 2rem;
+
+    .nav__menu {
+      display: flex;
+      align-items: center;
+
+      li {
+        a {
+          padding: 1rem 2rem;
+          text-transform: capitalize;
+          font-size: 1.25rem;
+          font-family: 'Bitter', serif;
+        }
+
+        .sign__out__btn {
+          padding: 1rem 2rem;
+          text-transform: capitalize;
+          font-size: 1.25rem;
+          font-family: 'Bitter', serif;
+        }
+      }
+    }
+  }
+}
+
+/* main */
+
+main {
+  padding: 4rem 2rem;
+}
+
+main.grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 4rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  main.grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  main.grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  background-color: rgba(125, 129, 138, 0.3);
+}
+
+/* recipe grid */
+.recipe__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 2rem;
+
+  .grid__recipe {
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.075);
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    background-color: rgb(240, 241, 241);
+    position: relative;
+
+    &:hover {
+      box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    figure {
+      height: 10rem;
+
+      img {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+      }
+    }
+
+    h3 {
+      padding: 1rem 1.25rem 0 1.25rem;
+      text-transform: capitalize;
+      font-family: 'Bitter', serif;
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      padding: 0 1.25rem 0 1.25rem;
+      color: rgba(77, 78, 80, 0.7);
+    }
+
+    ul.categories {
+      padding: 0.5rem 1.25rem 1rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+
+      li {
+        text-transform: capitalize;
+        padding-right: 1rem;
+        color: rgba(27, 36, 56, 0.7);
+      }
+    }
+
+    p.desc {
+      padding: 0 1.25rem 1rem 1.25rem;
+      font-size: 1.15rem;
+    }
+
+    h6.likes {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      text-align: center;
+      line-height: 2rem;
+      border-radius: 50%;
+      background-color: rgb(240, 241, 241);
+      box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
+      font-family: 'Bitter', serif;
+      font-size: 1.15rem;
+    }
+  }
+}
+
+/* recipe page */
+.recipe {
+  position: relative;
+
+  figure {
+    height: 24rem;
+
+    img {
+      border-radius: 8px;
+    }
+  }
+
+  h1 {
+    padding: 1rem 0 0.5rem 0;
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  h4 {
+    padding-bottom: 0.5rem;
+    color: rgba(77, 78, 80, 0.7);
+  }
+
+  ul.categories {
+    padding: 0.5rem 0 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+
+    li {
+      text-transform: capitalize;
+      padding-right: 1rem;
+      font-size: 1.15rem;
+      color: rgba(27, 36, 56, 0.7);
+    }
+  }
+
+  p.desc {
+    padding-bottom: 1rem;
+  }
+
+  ul.ingredients {
+    padding-bottom: 1rem;
+
+    h5 {
+      font-size: 1.15rem;
+      font-family: 'Bitter', serif;
+      font-weight: 600;
+      padding-bottom: 0.25rem;
+    }
+
+    li {
+      padding-bottom: 0.25rem;
+      list-style: circle;
+      margin-left: 1.15rem;
+    }
+  }
+
+  div.content {
+    padding-bottom: 1rem;
+
+    h5 {
+      font-size: 1.15rem;
+      font-family: 'Bitter', serif;
+      font-weight: 600;
+      padding-bottom: 0.25rem;
+    }
+  }
+
+  h6.likes {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+    border-radius: 50%;
+    background-color: rgb(240, 241, 241);
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
+    font-family: 'Bitter', serif;
+    font-size: 1.15rem;
+  }
+
+  .like__btn {
+    position: absolute;
+    top: 20rem;
+    right: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+    line-height: 3.5rem;
+    border-radius: 50%;
+    background-color: rgb(240, 241, 241);
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
+    font-family: 'Bitter', serif;
+    font-size: 1.05rem;
+  }
+}
+
+/* footer */
+.footer {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-family: 'Bitter', serif;
+  color: rgba(27, 36, 56, 0.7);
+}
