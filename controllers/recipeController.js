@@ -97,7 +97,20 @@ module.exports.putUpdateRecipeLikes = async (req, res) => {
     }
   });
 
-  if (!alreadyLiked) {
+  if (alreadyLiked) {
+    const recipe = await Recipe.findById(id);
+    recipe.likes = recipe.likes - 1;
+    await recipe.save();
+
+    const likedRecipes = user.likedRecipes;
+
+    for (let i = 0; i < likedRecipes.length; i++) {
+      if (likedRecipes[i]._id.toString() === id) {
+        likedRecipes.splice(i, 1);
+      }
+    }
+    await user.save();
+  } else {
     const recipe = await Recipe.findById(id);
     recipe.likes = recipe.likes + 1;
     await recipe.save();

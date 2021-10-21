@@ -40,10 +40,16 @@
         <%=recipe.likes%>
       </h6>
       <% if(user) { %>
-        <% if (!recipeLiked.liked) { %>
-          <button class="like__btn" type="btn">Like</button>
-          <% } %>
-            <%}%>
+
+        <button class="like__btn" type="btn">
+          <% if (!recipeLiked.liked) { %>
+            Like
+            <% } else { %>
+              Unlike
+              <%}%>
+        </button>
+
+        <%}%>
     </section>
 
     <section class="sidebar">
