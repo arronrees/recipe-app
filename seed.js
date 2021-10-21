@@ -39,7 +39,7 @@ const seedDB = async () => {
       categories: [`${sample(cats)}`],
       likes: randNum,
       user:
-        randNum > 10 ? '6168715951114b2160db286d' : '6168793927958a5fc0ef7def',
+        randNum > 10 ? '61700ac2064989142a5a54d5' : '61700ac2064989142a5a54d5',
     });
     await dish.save();
   }
