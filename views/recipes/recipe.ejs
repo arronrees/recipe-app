@@ -1,108 +1,117 @@
 <%- include('../partials/header'); -%>
 
-<main class="main">
-  <section class="recipe">
-    <figure>
-      <img src="<%=recipe.image%>" alt="<%=recipe.name%>" />
-    </figure>
+  <main class="main">
+    <section class="recipe">
+      <figure>
+        <img src="<%=recipe.image%>" alt="<%=recipe.name%>" />
+      </figure>
 
-    <h1><%=recipe.name%></h1>
+      <h1>
+        <%=recipe.name%>
+      </h1>
 
-    <h4>
-      <a href="/recipes/users/<%=recipe.user._id%>">
-        <%=recipe.user.username%>
-      </a>
-    </h4>
+      <h4>
+        <a href="/recipes/users/<%=recipe.user._id%>">
+          <%=recipe.user.username%>
+        </a>
+      </h4>
 
-    <ul class="categories">
-      <% recipe.categories.forEach(cat=> { %>
-      <li>
-        <a href="/recipes/categories/<%=cat%>">#<%=cat%> </a>
-      </li>
-      <% })%>
-    </ul>
+      <ul class="categories">
+        <% recipe.categories.forEach(cat=> { %>
+          <li>
+            <a href="/recipes/categories/<%=cat%>">#<%=cat%> </a>
+          </li>
+          <% })%>
+      </ul>
 
-    <p class="desc"><%=recipe.description%></p>
+      <p class="desc">
+        <%=recipe.description%>
+      </p>
 
-    <ul class="ingredients">
-      <h5>Ingredients</h5>
-      <% recipe.ingredients.forEach(ing=> { %>
-      <li><%=ing%></li>
-      <% })%>
-    </ul>
+      <ul class="ingredients">
+        <h5>Ingredients</h5>
+        <% recipe.ingredients.forEach(ing=> { %>
+          <li>
+            <%=ing%>
+          </li>
+          <% })%>
+      </ul>
 
-    <h6 class="likes"><%=recipe.likes%></h6>
+      <h6 class="likes">
+        <%=recipe.likes%>
+      </h6>
+      <% if(user) { %>
+
+        <button class="like__btn" type="btn">
+          <% if (!recipeLiked.liked) { %> Like <% } else { %> Unlike <%}%>
+        </button>
+
+        <% if (currentUser.recipe) { %>
+          <button type="button" class="delete__btn">Delete</button>
+          <% } %>
+
+            <%}%>
+
+
+              <div class="content">
+                <h5>Recipe</h5>
+                <p></p>
+              </div>
+    </section>
+
+    <section class="sidebar"></section>
+
     <% if(user) { %>
+      <script>
+        async function sendLike() {
+          const res = await fetch(
+            'http://localhost:5000/recipes/update-likes/<%=recipe._id%>',
+            {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userId: '<%=user._id%>' }),
+            }
+          );
 
-    <button class="like__btn" type="btn">
-      <% if (!recipeLiked.liked) { %> Like <% } else { %> Unlike <%}%>
-    </button>
+          const data = await res.json();
 
-    <% if (currentUser.recipe) { %>
-    <button type="button" class="delete__btn">Delete</button>
-    <% } %>
-
-    <div class="content">
-      <h5>Recipe</h5>
-      <p></p>
-    </div>
-
-    <%}%>
-  </section>
-
-  <section class="sidebar"></section>
-
-  <% if(user) { %>
-  <script>
-    async function sendLike() {
-      const res = await fetch(
-        'http://localhost:5000/recipes/update-likes/<%=recipe._id%>',
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: '<%=user._id%>' }),
+          if (data.success) {
+            window.location.reload();
+          }
         }
-      );
 
-      const data = await res.json();
+        if (!!document.querySelector('.like__btn')) {
+          const likeBtn = document.querySelector('.like__btn');
 
-      if (data.success) {
-        window.location.reload();
-      }
-    }
+          likeBtn.addEventListener('click', () => {
+            sendLike();
+          });
+        }
 
-    if (!!document.querySelector('.like__btn')) {
-      const likeBtn = document.querySelector('.like__btn');
+        async function deleteRecipe() {
+          const res = await fetch(
+            'http://localhost:5000/recipes/delete/<%=recipe._id%>',
+            { method: 'DELETE' }
+          );
 
-      likeBtn.addEventListener('click', () => {
-        sendLike();
-      });
-    }
+          const data = await res.json();
 
-    async function deleteRecipe() {
-      const res = await fetch(
-        'http://localhost:5000/recipes/delete/<%=recipe._id%>',
-        { method: 'DELETE' }
-      );
+          if (data.deletedCount) {
+            window.location.assign('/recipes');
+          } else {
+            console.log(data);
+          }
+        }
 
-      const data = await res.json();
+        if (!!document.querySelector('.delete__btn')) {
+          const btn = document.querySelector('.delete__btn');
 
-      if (data.deletedCount) {
-        window.location.assign('/recipes');
-      } else {
-        console.log(data);
-      }
-    }
+          btn.addEventListener('click', () => {
+            deleteRecipe();
+          });
+        }
+      </script>
+      <% }%>
+  </main>
 
-    if (!!document.querySelector('.delete__btn')) {
-      const btn = document.querySelector('.delete__btn');
-
-      btn.addEventListener('click', () => {
-        deleteRecipe();
-      });
-    }
-  </script>
-  <% }%>
-</main>
-
-<%- include('../partials/footer'); -%>
+  <%- include('../partials/footer'); -%>
