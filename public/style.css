@@ -301,10 +301,19 @@ main.grid {
 }
 
 .recipe .delete__btn {
-  background-color: lightblue;
+  background-color: #66142f;
+  color: #fff;
   padding: 1rem;
-  margin-bottom: 1.25rem;
   border-radius: 8px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 1rem;
+  top: 25rem;
+}
+
+.recipe .delete__btn:hover {
+  background-color: #3b0719;
 }
 
 .form__wrapper {

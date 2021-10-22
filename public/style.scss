@@ -276,10 +276,18 @@ main.grid {
   }
 
   .delete__btn {
-    background-color: lightblue;
+    background-color: rgb(102, 20, 47);
+    color: #fff;
     padding: 1rem;
-    margin-bottom: 1.25rem;
     border-radius: 8px;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 1rem;
+    top: 25rem;
+
+    &:hover {
+      background-color: rgb(59, 7, 25);
+    }
   }
 }
 
