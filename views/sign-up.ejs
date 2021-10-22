@@ -45,7 +45,7 @@
     let user = {};
 
     async function sendData(data) {
-      const res = await fetch('http://localhost:5000/user/sign-up', {
+      const res = await fetch('/user/sign-up', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

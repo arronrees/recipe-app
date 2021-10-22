@@ -30,7 +30,7 @@
     let user = {};
 
     async function sendData(data) {
-      const res = await fetch('http://localhost:5000/user/log-in', {
+      const res = await fetch('/user/log-in', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

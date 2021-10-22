@@ -65,7 +65,7 @@
       <script>
         async function sendLike() {
           const res = await fetch(
-            'http://localhost:5000/recipes/update-likes/<%=recipe._id%>',
+            '/recipes/update-likes/<%=recipe._id%>',
             {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
@@ -90,7 +90,7 @@
 
         async function deleteRecipe() {
           const res = await fetch(
-            'http://localhost:5000/recipes/delete/<%=recipe._id%>',
+            '/recipes/delete/<%=recipe._id%>',
             { method: 'DELETE' }
           );
 
