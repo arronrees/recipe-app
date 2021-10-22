@@ -24,6 +24,7 @@ module.exports.getSingleRecipe = async (req, res) => {
     );
 
     let recipeLiked = { liked: false };
+    let currentUser = { recipe: false };
 
     const user = res.locals.user;
 
@@ -33,9 +34,15 @@ module.exports.getSingleRecipe = async (req, res) => {
           recipeLiked.liked = true;
         }
       });
+
+      if (recipe.user._id.toString() === user._id.toString()) {
+        currentUser.recipe = true;
+      }
     }
 
-    res.status(200).render('recipes/recipe', { recipe, recipeLiked });
+    res
+      .status(200)
+      .render('recipes/recipe', { recipe, recipeLiked, currentUser });
   } catch (err) {
     const errors = handleRecipeErrors(err);
     res.status(errors.statusCode).render('404');
@@ -129,6 +136,8 @@ module.exports.deleteRecipe = async (req, res) => {
   const { id } = req.params;
 
   const deletedRecipe = await Recipe.deleteOne({ _id: id });
+
+  console.log(deletedRecipe);
 
   res.status(200).json(deletedRecipe);
 };

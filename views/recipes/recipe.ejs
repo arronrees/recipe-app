@@ -38,6 +38,10 @@
       <% if (!recipeLiked.liked) { %> Like <% } else { %> Unlike <%}%>
     </button>
 
+    <% if (currentUser.recipe) { %>
+    <button type="button" class="delete__btn">Delete</button>
+    <% } %>
+
     <div class="content">
       <h5>Recipe</h5>
       <p></p>
@@ -72,6 +76,29 @@
 
       likeBtn.addEventListener('click', () => {
         sendLike();
+      });
+    }
+
+    async function deleteRecipe() {
+      const res = await fetch(
+        'http://localhost:5000/recipes/delete/<%=recipe._id%>',
+        { method: 'DELETE' }
+      );
+
+      const data = await res.json();
+
+      if (data.deletedCount) {
+        window.location.assign('/recipes');
+      } else {
+        console.log(data);
+      }
+    }
+
+    if (!!document.querySelector('.delete__btn')) {
+      const btn = document.querySelector('.delete__btn');
+
+      btn.addEventListener('click', () => {
+        deleteRecipe();
       });
     }
   </script>

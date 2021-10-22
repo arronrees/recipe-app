@@ -304,6 +304,13 @@ main.grid {
   font-size: 1.05rem;
 }
 
+.recipe .delete__btn {
+  background-color: lightblue;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+}
+
 /* footer */
 .footer {
   margin-top: 4rem;
