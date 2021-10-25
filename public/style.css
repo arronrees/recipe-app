@@ -364,6 +364,7 @@ main.grid {
   font-family: 'Belleza', sans-serif;
   line-height: 1.5;
   letter-spacing: 0.5px;
+  margin-bottom: 1rem;
 }
 
 .form__wrapper form .row button {
@@ -385,6 +386,26 @@ main.grid {
 
 .form__wrapper form .row button:focus {
   background-color: #0e1e2e;
+}
+
+.form__wrapper form .ingplus,
+.form__wrapper form .catplus {
+  padding: 0 0 2rem 1rem;
+  cursor: pointer;
+}
+
+.form__wrapper form .ingplus svg,
+.form__wrapper form .catplus svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  opacity: 0.5;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.form__wrapper form .ingplus:hover svg,
+.form__wrapper form .catplus:hover svg {
+  opacity: 1;
 }
 
 .profile > div h3 {

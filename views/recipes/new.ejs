@@ -11,14 +11,28 @@
           <label for="description">Description</label>
           <textarea name="description" id="description" cols="30" rows="10" required></textarea>
         </div>
-        <div class="row">
+        <div class="row ingredients">
           <label for="ingredients">Ingredients</label>
-          <input type="text" name="ingredients" id="ingredients" required />
+          <input class="ingredients" type="text" name="ingredients" id="ingredients" required />
         </div>
-        <div class="row">
+        <button type="button" class="ingplus">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+          </svg>
+        </button>
+        <div class="row categories">
           <label for="categories">Categories</label>
-          <input type="text" name="categories" id="categories" required />
+          <input class="categories" type="text" name="categories" id="categories" required />
         </div>
+        <button type="button" class="catplus">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+          </svg>
+        </button>
         <div class="row">
           <label for="image">Image</label>
           <input type="text" name="image" id="image">
@@ -47,17 +61,25 @@
 
       const form = document.querySelector('.new__recipe__form');
 
-      let recipe = {};
-
-      const inputs = document.querySelectorAll('input');
-      const textareas = document.querySelectorAll('textarea');
-
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
+        let recipe = {
+          name: '',
+          description: '',
+          ingredients: [],
+          categories: [],
+          image: ''
+        };
+
+        const inputs = document.querySelectorAll('input');
+        const textareas = document.querySelectorAll('textarea');
+
         inputs.forEach((input) => {
-          if (input.name === 'ingredients' || input.name === 'categories') {
-            recipe[input.name] = [input.value];
+          if (input.classList.contains('ingredients')) {
+            recipe.ingredients.push(input.value);
+          } else if (input.classList.contains('categories')) {
+            recipe.categories.push(input.value);
           } else {
             recipe[input.name] = input.value;
           }
@@ -69,8 +91,42 @@
 
         recipe.user = '<%=user._id %>';
 
+        console.log(recipe)
         sendData(recipe);
       });
+
+      const ingPlus = document.querySelector('.ingplus');
+      let ingCount = 1;
+      const ingRow = document.querySelector('.row.ingredients')
+
+      ingPlus.addEventListener('click', () => {
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = `ingredients${ingCount}`;
+        newInput.id = `ingredients${ingCount}`;
+        newInput.classList.add('ingredients')
+
+        ingRow.appendChild(newInput)
+
+        ingCount++;
+      });
+
+      const catPlus = document.querySelector('.catplus');
+      let catCount = 1;
+      const catRow = document.querySelector('.row.categories')
+
+      catPlus.addEventListener('click', () => {
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = `categories${ingCount}`;
+        newInput.id = `categories${ingCount}`;
+        newInput.classList.add('categories')
+
+        catRow.appendChild(newInput)
+
+        catCount++;
+      });
+
     </script>
   </main>
 
