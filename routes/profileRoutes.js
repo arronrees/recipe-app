@@ -19,4 +19,22 @@ router.get(
   profileController.getMyRecipes
 );
 
+router.get(
+  '/profile/update-details',
+  checkLoggedInRedirect,
+  profileController.getUpdateDetails
+);
+
+router.get(
+  '/profile/update-password',
+  checkLoggedInRedirect,
+  profileController.getUpdatePassword
+);
+
+router.get(
+  '/profile/delete-account',
+  checkLoggedInRedirect,
+  profileController.getDeleteAccount
+);
+
 module.exports = router;

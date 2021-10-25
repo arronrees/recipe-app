@@ -35,7 +35,10 @@ module.exports.checkLoggedInRedirect = (req, res, next) => {
   if (
     req.path === '/profile' ||
     req.path === '/profile/saved-recipes' ||
-    req.path === '/profile/my-recipes'
+    req.path === '/profile/my-recipes' ||
+    req.path === '/profile/update-details' ||
+    req.path === '/profile/update-password' ||
+    req.path === '/profile/delete-account'
   ) {
     if (res.locals.user) {
       next();

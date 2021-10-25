@@ -472,6 +472,7 @@ main.grid {
   background-color: rgba(125, 129, 138, 0.3);
   display: flex;
   flex-direction: column;
+  height: max-content;
 
   a {
     font-size: 1.25rem;

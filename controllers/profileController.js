@@ -24,3 +24,15 @@ module.exports.getMyRecipes = async (req, res) => {
 
   res.render('profile/my-recipes', { recipes });
 };
+
+module.exports.getUpdateDetails = async (req, res) => {
+  res.render('profile/update-details');
+};
+
+module.exports.getUpdatePassword = async (req, res) => {
+  res.render('profile/update-password');
+};
+
+module.exports.getDeleteAccount = async (req, res) => {
+  res.render('profile/delete-account');
+};
