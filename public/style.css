@@ -9,6 +9,7 @@ a {
   color: currentColor;
   text-decoration: none;
   cursor: pointer;
+  display: block;
 }
 
 figure {
@@ -59,7 +60,7 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem 2rem 0 2rem;
+  padding: 2rem 2rem 0 2rem;
 }
 
 .header .navbar .nav__menu {
@@ -78,11 +79,69 @@ button {
   font-family: 'Bitter', serif;
 }
 
+.header .navbar .nav__menu li a.signup {
+  background-color: #59728f;
+  border-radius: 8px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.header .navbar .nav__menu li a.signup:hover {
+  background-color: #2d3d4e;
+}
+
+.header .navbar .nav__menu li a.login {
+  background-color: #82b3db;
+  border-radius: 8px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+}
+
+.header .navbar .nav__menu li a.login:hover {
+  background-color: #355e8a;
+}
+
 .header .navbar .nav__menu li .sign__out__btn {
   padding: 1rem 2rem;
   text-transform: capitalize;
   font-size: 1.25rem;
   font-family: 'Bitter', serif;
+  background-color: #59728f;
+  border-radius: 8px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.header .navbar .nav__menu li .sign__out__btn:hover {
+  background-color: #2d3d4e;
+}
+
+@media only screen and (max-width: 800px) {
+  .header .navbar {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .header .navbar .logo {
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header .navbar .nav__menu {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .header .navbar .nav__menu li {
+    margin-bottom: 1rem;
+  }
 }
 
 /* main */
@@ -194,6 +253,13 @@ main.grid {
   font-size: 1.15rem;
 }
 
+@media only screen and (max-width: 450px) {
+  .recipe__grid {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
 /* recipe page */
 .recipe {
   position: relative;
@@ -270,8 +336,8 @@ main.grid {
 
 .recipe h6.likes {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 20.75rem;
+  right: 5rem;
   width: 2rem;
   height: 2rem;
   text-align: center;
@@ -290,14 +356,26 @@ main.grid {
   right: 1rem;
   width: 3.5rem;
   height: 3.5rem;
-  text-align: center;
-  line-height: 3.5rem;
   border-radius: 50%;
   background-color: #f0f1f1;
   -webkit-box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
           box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
   font-family: 'Bitter', serif;
   font-size: 1.05rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.recipe .like__btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .recipe .delete__btn {
@@ -388,6 +466,11 @@ main.grid {
   background-color: #0e1e2e;
 }
 
+.form__wrapper form .row .error {
+  padding-left: 1rem;
+  color: #e22232;
+}
+
 .form__wrapper form .ingplus,
 .form__wrapper form .catplus {
   padding: 0 0 2rem 1rem;
@@ -440,8 +523,8 @@ main.grid {
 }
 
 .profile__sidebar a {
-  font-size: 1.5rem;
-  padding: 1rem;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
@@ -453,7 +536,7 @@ main.grid {
 
 /* footer */
 .footer {
-  margin-top: 4rem;
+  margin: 4rem 0;
   text-align: center;
   font-size: 0.8rem;
   font-family: 'Bitter', serif;
