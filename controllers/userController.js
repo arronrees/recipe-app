@@ -92,6 +92,14 @@ module.exports.putUpdateUserPassword = async (req, res) => {
   }
 };
 
+module.exports.deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.deleteOne({ _id: id });
+
+  res.status(200).json(user);
+};
+
 // to be removed in production
 module.exports.getAllUsers = async (req, res) => {
   const users = await User.find({});

@@ -47,7 +47,7 @@
       const signOutBtn = document.querySelector('.sign__out__btn');
 
       async function signOut() {
-        const res = await fetch('/sign-out', {
+        const res = await fetch('/user/sign-out', {
           method: 'POST',
         });
 

@@ -15,7 +15,7 @@ router.post('/user/sign-up', validateUserObject, userController.postNewSignUp);
 
 router.post('/user/log-in', userController.postLogin);
 
-router.post('/sign-out', userController.postSignOut);
+router.post('/user/sign-out', userController.postSignOut);
 
 router.put(
   '/user/update-details/:id',
@@ -28,6 +28,8 @@ router.put(
   validatePassword,
   userController.putUpdateUserPassword
 );
+
+router.delete('/user/:id', userController.deleteUser);
 
 router.get('/users', userController.getAllUsers);
 

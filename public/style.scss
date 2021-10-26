@@ -87,6 +87,7 @@ button {
             &:hover {
               background-color: #355e8a;
             }
+
             margin-right: 1rem;
           }
         }
@@ -130,6 +131,12 @@ button {
 
         li {
           margin-bottom: 1rem;
+
+          a {
+            &.login {
+              margin-right: 0;
+            }
+          }
         }
       }
     }
@@ -412,6 +419,14 @@ main.grid {
         border-radius: 8px;
         box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
+
+        &.delete__btn {
+          background-color: #e22232;
+
+          &:hover {
+            background-color: #a70e1b;
+          }
+        }
 
         &:hover {
           background-color: rgb(14, 30, 46);

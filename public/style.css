@@ -142,6 +142,9 @@ button {
   .header .navbar .nav__menu li {
     margin-bottom: 1rem;
   }
+  .header .navbar .nav__menu li a.login {
+    margin-right: 0;
+  }
 }
 
 /* main */
@@ -460,6 +463,14 @@ main.grid {
           box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+.form__wrapper form .row button.delete__btn {
+  background-color: #e22232;
+}
+
+.form__wrapper form .row button.delete__btn:hover {
+  background-color: #a70e1b;
 }
 
 .form__wrapper form .row button:hover {

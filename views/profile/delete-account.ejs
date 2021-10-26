@@ -1,11 +1,42 @@
 <%- include('../partials/header'); -%>
 
   <main class="grid">
-    <section>
+    <section class="form__wrapper profile__form">
+
+      <form class="delete__form">
+        <div class="row">
+          <button class="delete__btn" type="submit">Delete Account</button>
+        </div>
+      </form>
 
     </section>
 
     <%- include('../partials/profile-sidebar'); -%>
+
   </main>
+
+  <script>
+    const form = document.querySelector('form.delete__form');
+
+    async function sendData() {
+      const res = await fetch('/user/<%=user._id%>', {
+        method: 'DELETE',
+      });
+      const response = await res.json();
+
+      if (response.deletedCount) {
+        window.location.reload()
+      } else {
+        console.log('Error ------', response)
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      sendData()
+    });
+
+  </script>
 
   <%- include('../partials/footer'); -%>
