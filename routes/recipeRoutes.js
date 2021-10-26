@@ -1,5 +1,8 @@
 const { Router } = require('express');
 
+const multer = require('multer');
+const upload = multer({ dest: 'files/' });
+
 const recipeController = require('../controllers/recipeController');
 const { validateRecipeObject } = require('../middleware/validateRecipeObject');
 const { checkLoggedInRedirect } = require('../middleware/authMiddleware');
@@ -21,8 +24,9 @@ router.get('/recipes/categories/:id', recipeController.getCategoryRecipes);
 router.get('/recipes/users/:id', recipeController.getUserRecipes);
 
 router.post(
-  '/recipes/new',
-  validateRecipeObject,
+  '/recipes/new/:id',
+  // validateRecipeObject,
+  upload.single('image'),
   recipeController.postNewRecipe
 );
 

@@ -39,8 +39,11 @@ const seedDB = async () => {
       categories: [`${sample(cats)}`],
       likes: randNum,
       user:
-        randNum > 10 ? '6168793927958a5fc0ef7def' : '6168715951114b2160db286d',
-      image: 'https://source.unsplash.com/collection/2533969/',
+        randNum > 10 ? '6172c909cfac6a152c9308ea' : '6177b1ba9cb6e29d0338cae7',
+      image: {
+        filename: 'file',
+        url: 'https://source.unsplash.com/collection/2533969/',
+      },
     });
     await dish.save();
   }

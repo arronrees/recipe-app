@@ -7,5 +7,8 @@ module.exports.joiRecipeSchema = Joi.object({
   categories: Joi.array().items(Joi.string()),
   likes: Joi.number(),
   user: Joi.string().required(),
-  image: Joi.string(),
+  image: Joi.object({
+    url: Joi.string(),
+    filename: Joi.string(),
+  }),
 });

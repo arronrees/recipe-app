@@ -416,6 +416,10 @@ main.grid {
           flex-direction: column;
 }
 
+.form__wrapper form.new__recipe__form--image {
+  display: none;
+}
+
 .form__wrapper form .row {
   display: -webkit-box;
   display: -ms-flexbox;

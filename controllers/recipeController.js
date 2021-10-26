@@ -77,11 +77,21 @@ module.exports.getNewRecipe = async (req, res) => {
 };
 
 module.exports.postNewRecipe = async (req, res) => {
-  const { body } = req;
+  const { id } = req.params;
+  const { body, file } = req;
 
-  const newRecipe = await Recipe.create(body);
+  const newRecipe = new Recipe(body);
+  newRecipe.image = {
+    url: file.path,
+    filename: file.filename,
+  };
+  newRecipe.user = id;
 
-  res.status(201).json(newRecipe);
+  await newRecipe.save();
+  console.log(id);
+  console.log(newRecipe);
+
+  res.status(201).redirect('/recipes');
 };
 
 module.exports.putUpdateRecipe = async (req, res) => {

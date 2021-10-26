@@ -25,7 +25,8 @@ const recipeSchema = new Schema({
     ref: 'User',
   },
   image: {
-    type: String,
+    url: String,
+    filename: String,
   },
 });
 
