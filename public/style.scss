@@ -173,6 +173,15 @@ main.grid {
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   gap: 2rem;
 
+  > .message {
+    font-size: 1.5rem;
+    font-family: 'Bitter', serif;
+
+    a {
+      color: #e22232;
+    }
+  }
+
   .grid__recipe {
     box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
