@@ -37,6 +37,13 @@
           <% })%>
       </ul>
 
+      <div class="content">
+        <h5>Recipe</h5>
+        <div class="recipe--content">
+          <%-recipe.recipeContent%>
+        </div>
+      </div>
+
       <h6 class="likes">
         <%=recipe.likes%>
       </h6>
@@ -64,13 +71,7 @@
 
             <%}%>
 
-              <div class="content">
-                <h5>Recipe</h5>
-                <%=recipe.recipeContent%>
-              </div>
     </section>
-
-    <section class="sidebar"></section>
 
     <% if(user) { %>
       <script>

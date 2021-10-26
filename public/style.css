@@ -288,7 +288,7 @@ main.grid {
 .recipe h1 {
   padding: 1rem 0 0.5rem 0;
   text-transform: capitalize;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
 }
 
@@ -315,15 +315,15 @@ main.grid {
 }
 
 .recipe p.desc {
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 
 .recipe ul.ingredients {
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 }
 
 .recipe ul.ingredients h5 {
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-family: 'Bitter', serif;
   font-weight: 600;
   padding-bottom: 0.25rem;
@@ -332,7 +332,7 @@ main.grid {
 .recipe ul.ingredients li {
   padding-bottom: 0.25rem;
   list-style: circle;
-  margin-left: 1.15rem;
+  margin-left: 1.25rem;
 }
 
 .recipe div.content {
@@ -340,10 +340,36 @@ main.grid {
 }
 
 .recipe div.content h5 {
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-family: 'Bitter', serif;
   font-weight: 600;
   padding-bottom: 0.25rem;
+}
+
+.recipe div.content .recipe--content li {
+  list-style: circle;
+  margin-left: 1rem;
+}
+
+.recipe div.content .recipe--content p,
+.recipe div.content .recipe--content li {
+  font-size: 1.15rem;
+  padding-bottom: 0.5rem;
+}
+
+.recipe div.content .recipe--content h1,
+.recipe div.content .recipe--content h2,
+.recipe div.content .recipe--content h3,
+.recipe div.content .recipe--content h4,
+.recipe div.content .recipe--content h5,
+.recipe div.content .recipe--content h6 {
+  padding-bottom: 0.5rem;
+  font-family: 'Bitter', serif;
+  font-size: 1.15rem;
+}
+
+.recipe div.content .recipe--content strong {
+  font-weight: bold;
 }
 
 .recipe h6.likes {
