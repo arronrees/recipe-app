@@ -1,4 +1,5 @@
 const { joiPasswordValidate } = require('../models/joiSchemas/joiUser');
+const { handleJoiUserErrors } = require('../utils/handleErrors');
 
 module.exports.validatePassword = (req, res, next) => {
   const { password } = req.body;
@@ -6,13 +7,12 @@ module.exports.validatePassword = (req, res, next) => {
   const { error } = joiPasswordValidate.validate(password);
 
   if (error) {
-    const msg = error.details.map((err) => err.message).join(',');
-    console.log(msg);
+    const errors = handleJoiUserErrors(error);
+    console.log(errors);
 
-    throw new Error(msg);
+    res.status(400).json(errors);
   } else {
-    console.log('Password valid');
+    console.log('User password valid');
+    next();
   }
-
-  next();
 };

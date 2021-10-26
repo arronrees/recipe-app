@@ -57,6 +57,10 @@ module.exports.handleJoiUserErrors = (err) => {
     err.message.includes('"password" length must be at least 8 characters long')
   ) {
     errors.password = 'Password must be at least 8 characters';
+  } else if (
+    err.message.includes('"value" length must be at least 8 characters long')
+  ) {
+    errors.password = 'Password must be at least 8 characters';
   } else if (err.message.includes('"email" must be a valid email')) {
     errors.email = 'Email must be valid';
   }
