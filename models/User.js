@@ -70,6 +70,13 @@ userSchema.statics.updatePasswordCheck = async function (id, password) {
   throw Error('User not found');
 };
 
+userSchema.statics.updatePasswordHash = async function (password) {
+  const salt = await bcrypt.genSalt();
+  const newPassword = await bcrypt.hash(password, salt);
+
+  return newPassword;
+};
+
 const User = model('User', userSchema);
 
 module.exports = User;

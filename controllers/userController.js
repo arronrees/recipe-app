@@ -83,7 +83,11 @@ module.exports.putUpdateUserPassword = async (req, res) => {
 
   try {
     await User.updatePasswordCheck(id, password);
-    const updatedUser = await User.updateOne({ _id: id }, { password });
+    const newPassword = await User.updatePasswordHash(password);
+    const updatedUser = await User.updateOne(
+      { _id: id },
+      { password: newPassword }
+    );
 
     res.status(201).json(updatedUser);
   } catch (err) {
