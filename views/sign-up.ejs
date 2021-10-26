@@ -54,11 +54,15 @@
       });
       const response = await res.json();
 
+      console.log(response)
+
       if (response._id) {
         window.location.assign('/recipes')
-      } else if (response.username) {
+      } else if (response.username === 'Username already taken') {
         document.querySelector('.error--username').textContent = 'Username already taken'
-      } else if (response.email) {
+      } else if (response.email === 'Email must be valid') {
+        document.querySelector('.error--email').textContent = 'Email must be in a valid format'
+      } else if (response.email === 'Email already registered') {
         document.querySelector('.error--email').textContent = 'Email already registered, please login'
       } else if (response.password) {
         document.querySelector('.error--password').textContent = 'Password must be at least 8 characters'

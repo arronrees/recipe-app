@@ -52,7 +52,6 @@ module.exports.handleJoiUserErrors = (err) => {
     password: '',
   };
 
-  // password not long enough
   if (
     err.message.includes('"password" length must be at least 8 characters long')
   ) {
