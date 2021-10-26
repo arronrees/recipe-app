@@ -17,7 +17,11 @@ router.post('/user/log-in', userController.postLogin);
 
 router.post('/sign-out', userController.postSignOut);
 
-router.put('/user/update-details/:id', userController.putUpdateUserDetails);
+router.put(
+  '/user/update-details/:id',
+  validateUserObject,
+  userController.putUpdateUserDetails
+);
 
 router.put(
   '/user/update-password/:id',

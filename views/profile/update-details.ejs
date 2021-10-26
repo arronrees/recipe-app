@@ -1,11 +1,83 @@
 <%- include('../partials/header'); -%>
 
   <main class="grid">
-    <section>
+    <section class="form__wrapper profile__form">
+
+      <form class="update__details__form">
+        <div class="row">
+          <label for="firstName">First Name</label>
+          <input value="<%=user.firstName%>" type="text" name="firstName" id="firstName">
+          <div class="error error--firstName"></div>
+        </div>
+        <div class="row">
+          <label for="lastName">Last Name</label>
+          <input value="<%=user.lastName%>" type="text" name="lastName" id="lastName">
+          <div class="error error--lastName"></div>
+        </div>
+        <div class="row">
+          <label for="username">Username</label>
+          <input value="<%=user.username%>" type="text" name="username" id="username">
+          <div class="error error--username"></div>
+        </div>
+        <div class="row">
+          <label for="email">Email</label>
+          <input value="<%=user.email%>" type="email" name="email" id="email">
+          <div class="error error--email"></div>
+        </div>
+        <div class="row">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
 
     </section>
 
     <%- include('../partials/profile-sidebar'); -%>
+
   </main>
+
+  <script>
+    const form = document.querySelector('form.update__details__form');
+
+    let user = {}
+
+    async function sendData(data) {
+      const res = await fetch('/user/update-details/<%=user._id%>', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      });
+      const response = await res.json();
+
+      console.log(response)
+      if (response.acknowledged) {
+        window.location.reload()
+      } else if (response.email === 'Email must be valid') {
+        document.querySelector('.error--email').textContent = 'Email must be in a valid format'
+      } else if (response.email === 'Email already registered') {
+        document.querySelector('.error--email').textContent = 'Email already registered'
+      } else if (response.username === 'Username already taken') {
+        document.querySelector('.error--username').textContent = 'Username already taken'
+      } else {
+        console.log('Error --- ', response)
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const inputs = form.querySelectorAll('input');
+
+      inputs.forEach(input => {
+        user[input.name] = input.value;
+      });
+
+      user.password = 'hiddenpassword'
+
+      sendData(user)
+    });
+
+  </script>
 
   <%- include('../partials/footer'); -%>

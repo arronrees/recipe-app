@@ -399,6 +399,10 @@ main.grid {
   margin: 0 auto;
 }
 
+.form__wrapper.profile__form {
+  margin: 0;
+}
+
 .form__wrapper form {
   display: -webkit-box;
   display: -ms-flexbox;
