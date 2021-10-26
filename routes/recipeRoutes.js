@@ -1,7 +1,8 @@
 const { Router } = require('express');
 
 const multer = require('multer');
-const upload = multer({ dest: 'files/' });
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 const recipeController = require('../controllers/recipeController');
 const { validateRecipeObject } = require('../middleware/validateRecipeObject');
