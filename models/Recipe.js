@@ -28,6 +28,10 @@ const recipeSchema = new Schema({
     url: String,
     filename: String,
   },
+  recipeContent: {
+    type: String,
+    required: true,
+  },
 });
 
 const Recipe = model('Recipe', recipeSchema);

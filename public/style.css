@@ -465,7 +465,7 @@ main.grid {
   margin-bottom: 1rem;
 }
 
-.form__wrapper form .row button {
+.form__wrapper form .row > button {
   font-family: 'Bitter', serif;
   font-size: 1.15rem;
   color: #fff;
@@ -478,19 +478,19 @@ main.grid {
   transition: all 0.3s ease;
 }
 
-.form__wrapper form .row button.delete__btn {
+.form__wrapper form .row > button.delete__btn {
   background-color: #e22232;
 }
 
-.form__wrapper form .row button.delete__btn:hover {
+.form__wrapper form .row > button.delete__btn:hover {
   background-color: #a70e1b;
 }
 
-.form__wrapper form .row button:hover {
+.form__wrapper form .row > button:hover {
   background-color: #0e1e2e;
 }
 
-.form__wrapper form .row button:focus {
+.form__wrapper form .row > button:focus {
   background-color: #0e1e2e;
 }
 

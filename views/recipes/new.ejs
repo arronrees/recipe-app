@@ -1,5 +1,17 @@
 <%- include('../partials/header'); -%>
 
+  <script src="https://cdn.tiny.cloud/1/ydewp6dvevg1oagpic1c8rbm40kj28tzcb0gccbodqa3djtx/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+  <script>
+    tinymce.init({
+      selector: '#recipeContent',
+      menubar: '',
+      toolbar: 'undo redo | styleselect | bold italic | bullist |',
+      plugins: 'lists advlist'
+    });
+  </script>
+
   <main class="main">
     <section class="form__wrapper">
       <form class="new__recipe__form" method="POST" enctype="multipart/form-data" action="/recipes/new/<%=user._id%>">
@@ -36,6 +48,10 @@
         <div class="row">
           <label for="image">Image</label>
           <input type="file" name="image" id="image">
+        </div>
+        <div class="row">
+          <label for="recipeContent">Recipe</label>
+          <textarea name="recipeContent" id="recipeContent"></textarea>
         </div>
         <div class="row">
           <button type="submit">Submit</button>
