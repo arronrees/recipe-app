@@ -15,8 +15,12 @@ module.exports.handleUserErrors = (err) => {
     errors.password = 'Incorrect password';
   }
 
-  // duplicate error code
+  if (err.message === 'New password cannot be the same as current password') {
+    errors.password = 'New password cannot be the same as current password';
+  }
+
   if (err.code === 11000) {
+    // duplicate error code
     if (err.message.includes('username:')) {
       errors.username = 'Username already taken';
     } else if (err.message.includes('email:')) {
