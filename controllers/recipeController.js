@@ -88,8 +88,6 @@ module.exports.postNewRecipe = async (req, res) => {
   newRecipe.user = id;
 
   await newRecipe.save();
-  console.log(id);
-  console.log(newRecipe);
 
   res.status(201).redirect('/recipes');
 };
